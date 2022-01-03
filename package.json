@@ -54,7 +54,7 @@
     "prettier-eslint": "^13.0.0"
   },
   "lint-staged": {
-    "src/*.{ts,tsx}": [
+    "**/*.{ts,tsx,js,jsx}": [
       "yarn lint"
     ]
   }
