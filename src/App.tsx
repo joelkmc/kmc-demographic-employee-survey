@@ -1,6 +1,3 @@
-// import { useEffect } from 'react';
-import { useEffect } from 'react';
-
 import './App.css';
 import { useLogin } from './services/Auth/auth.hooks';
 
