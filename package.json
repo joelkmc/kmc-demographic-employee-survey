@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@headlessui/react": "^1.4.2",
+    "@heroicons/react": "^1.0.5",
     "@hookform/resolvers": "^2.8.5",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -12,8 +14,10 @@
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "dayjs": "^1.10.7",
+    "framer-motion": "^5.5.5",
     "ky": "^0.28.7",
     "react": "^17.0.2",
+    "react-date-picker": "^8.3.6",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.22.5",
     "react-hot-toast": "^2.1.1",
@@ -52,16 +56,20 @@
     ]
   },
   "devDependencies": {
+    "@tailwindcss/line-clamp": "^0.3.0",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
+    "autoprefixer": "^10.4.1",
     "eslint": "^8.6.0",
     "eslint-plugin-jest": "^25.3.4",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.5",
+    "postcss": "^8.4.5",
     "prettier": "^2.5.1",
-    "prettier-eslint": "^13.0.0"
+    "prettier-eslint": "^13.0.0",
+    "tailwindcss": "^3.0.9"
   },
   "lint-staged": {
     "**/*.{ts,tsx,js,jsx}": [

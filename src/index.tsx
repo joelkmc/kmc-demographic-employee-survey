@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import ReactQueryProvider from './services/ReactQueryProvider';
 import RoutesNavigation from './infrastructure/navigation/Routes.navigation';
+import './infrastructure/styles/index.css';
 
 ReactDOM.render(
   <React.StrictMode>
