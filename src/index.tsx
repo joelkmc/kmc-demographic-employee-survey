@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ReactQueryProvider from './services/ReactQueryProvider';
+import RoutesNavigation from './infrastructure/navigation/Routes.navigation';
 
 ReactDOM.render(
   <React.StrictMode>
     <ReactQueryProvider>
-      <App />
+      <RoutesNavigation />
     </ReactQueryProvider>
   </React.StrictMode>,
   document.getElementById('root')

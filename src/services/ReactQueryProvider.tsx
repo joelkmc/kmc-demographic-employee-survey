@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+// import { ReactQueryDevtools } from 'react-query/devtools';
 
 const ReactQueryProvider: React.FC = ({ children }) => {
   const queryClient = useRef<QueryClient>();
@@ -12,7 +12,7 @@ const ReactQueryProvider: React.FC = ({ children }) => {
   return (
     <QueryClientProvider client={queryClient.current}>
       {children}
-      <ReactQueryDevtools />
+      {/* <ReactQueryDevtools /> */}
     </QueryClientProvider>
   );
 };
