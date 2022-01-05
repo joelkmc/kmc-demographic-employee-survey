@@ -1,60 +1,43 @@
-import ky, { Options } from 'ky';
-
-// Define middlewares
-// headers, transform returns, transform requests
-const apiCall = ky.extend({
-  retry: 0,
-
-  hooks: {
-    beforeRequest: [
-      (request) => {
-        request.headers.set('Content-Type', 'application/json');
-        request.headers.set('Accept', 'application/json');
-        request.headers.set('charset', 'utf-8');
-      },
-    ],
-    afterResponse: [
-      async (_request, _options, response) => {
-        console.log(response);
-
-        if (response.status >= 400) {
-          const data = await response.json();
-
-          let errorMsg = '';
-
-          if (response.status === 400) {
-            errorMsg = data.message;
-          }
-
-          return Promise.reject({
-            message: errorMsg || response.statusText,
-            satus: response.status,
-          });
-        }
-      },
-    ],
-  },
-});
-
 export const apiClient = async <T>(
-  url: string,
-  options: Options,
-  body?: any
-): Promise<T | undefined> => {
-  try {
-    const { prefixUrl, ...rest } = options;
+  endpoint: string,
+  customConfig?: RequestInit,
+  token?: string
+): Promise<T> => {
+  const config: RequestInit = {
+    ...customConfig,
+    headers: {
+      'Content-Type': 'application/json-patch+json',
+      Accept: 'application/json',
+      charset: 'utf-8',
+      ...customConfig?.headers,
+    },
+  };
 
-    const res = await apiCall(`${url}`, {
-      prefixUrl: prefixUrl || process.env.REACT_APP_API_BASE_URL,
-      ...rest,
-      body: body ? JSON.stringify(body) : undefined,
-    });
-
-    const data = await res.json();
-
-    console.log(res);
-    return data;
-  } catch (e: any) {
-    Promise.reject(e);
+  if (token) {
+    config.headers = {
+      ...config?.headers,
+      Authorization: `Bearer ${token}`,
+    };
   }
+
+  const res = await fetch(
+    `${process.env.REACT_APP_API_BASE_URL}${endpoint}`,
+    config
+  );
+
+  const data = await res.json();
+
+  if (res.ok) {
+    return data;
+  }
+  // eslint-disable-next-line prefer-promise-reject-errors
+  return Promise.reject({
+    message: data.errors ? data.errors[0] : data,
+    status: res.status,
+  });
+};
+
+export type IErrorData = {
+  message: string;
+  status: number;
 };

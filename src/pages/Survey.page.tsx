@@ -1,10 +1,16 @@
 import { motion } from 'framer-motion';
 import React from 'react';
 import { Link, useMatch } from 'react-location';
-import { ProtectedRouteLocationGenerics } from '../infrastructure/navigation/routes';
+import { LocationGenerics } from '../infrastructure/navigation/routes';
 
 const SurveyPage: React.FC = () => {
-  const { employeeID } = useMatch<ProtectedRouteLocationGenerics>().params;
+  const {
+    params: { employeeID },
+    data,
+  } = useMatch<LocationGenerics>();
+
+  console.log(data);
+  // const { status, data, error, isFetching } = usePost(postId);
 
   return (
     <motion.div

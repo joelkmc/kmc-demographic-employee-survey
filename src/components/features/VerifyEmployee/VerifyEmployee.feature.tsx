@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
@@ -109,10 +108,7 @@ const VerifyEmployeeFeature: React.FC = () => {
         />
 
         <div className='mt-4 flex justify-end '>
-          <Button
-            type='submit'
-            // isLoading={isLoading}
-          >
+          <Button type='submit' isLoading={isLoading}>
             Verify
           </Button>
         </div>
