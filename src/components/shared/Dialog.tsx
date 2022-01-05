@@ -64,7 +64,7 @@ export const Dialog: React.FC<DialogProps> = ({
                 {title && (
                   <DialogComp.Title
                     as='h3'
-                    className='text-lg font-proxiSemiBold leading-6 text-gray-800'
+                    className='text-lg font-semibold leading-6 text-gray-800'
                   >
                     {title}
                   </DialogComp.Title>

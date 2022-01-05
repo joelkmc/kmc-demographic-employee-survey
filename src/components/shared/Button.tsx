@@ -17,7 +17,7 @@ const Button: React.FC<ButtonProps> = ({
   ...rest
 }) => {
   const buttonStyles = {
-    primary: 'bg-kmc-primary ring-kmc-primary text-white',
+    primary: 'bg-primary ring-primary text-white',
     dark: 'border border-gray-400 text-gray-400 hover:text-white hover:bg-gray-400 transition-all',
   };
 
@@ -31,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({
     >
       {isLoading && <AiOutlineLoading className='animate-spin text-white' />}
       <span
-        className={`font-proxiSemiBold transition-all ${
+        className={`font-barlow font-bold transition-all ${
           isLoading ? 'pl-3' : 'pl-0'
         }`}
       >

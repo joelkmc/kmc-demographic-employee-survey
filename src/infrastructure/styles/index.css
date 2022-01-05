@@ -18,6 +18,8 @@
   /*! purgecss start ignore */
   body {
     font-family: 'Barlow';
+
+    letter-spacing: 0.005em;
   }
   /*! purgecss end ignore */
 }

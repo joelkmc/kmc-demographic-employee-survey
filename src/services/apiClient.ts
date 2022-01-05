@@ -9,12 +9,13 @@ const apiCall = ky.extend({
     beforeRequest: [
       (request) => {
         request.headers.set('Content-Type', 'application/json');
+        request.headers.set('Accept', 'application/json');
         request.headers.set('charset', 'utf-8');
       },
     ],
     afterResponse: [
       async (_request, _options, response) => {
-        // console.log(response);
+        console.log(response);
 
         if (response.status >= 400) {
           const data = await response.json();
@@ -51,8 +52,9 @@ export const apiClient = async <T>(
 
     const data = await res.json();
 
+    console.log(res);
     return data;
   } catch (e: any) {
-    console.log(e);
+    Promise.reject(e);
   }
 };

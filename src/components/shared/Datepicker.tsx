@@ -52,10 +52,7 @@ export const Datepicker: React.FC<DatepickerProps> = ({
 
   return (
     <div {...rest}>
-      <label
-        htmlFor={name}
-        className='block text-sm font-proxiSemiBold text-gray-600 mb-1'
-      >
+      <label htmlFor={name} className='block text-sm text-gray-600 mb-1'>
         {label}
       </label>
       <DatePicker

@@ -20,14 +20,14 @@ const Checkbox: React.FC<checkboxProps> = ({ label = '', name, className }) => {
           <input
             id={name}
             type='checkbox'
-            className={`focus:ring-kmc-primary focus:ring-opacity-60 h-4 w-4 text-kmc-primary rounded ${
-              errors[name] ? 'border-red-600' : 'border-gray-300'
+            className={`focus:ring-primary focus:ring-opacity-60 h-4 w-4 text-primary rounded ${
+              errors[name] ? 'border-rose-600' : 'border-gray-300'
             }`}
             {...register(name)}
           />
         </div>
         <div className='ml-2 text-sm'>
-          <label htmlFor='comments' className='font-medium text-gray-700'>
+          <label htmlFor='comments' className='text-gray-700'>
             {label}
           </label>
         </div>

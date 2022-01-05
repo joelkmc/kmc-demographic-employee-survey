@@ -4,6 +4,7 @@ import reportWebVitals from './reportWebVitals';
 import ReactQueryProvider from './services/ReactQueryProvider';
 import RoutesNavigation from './infrastructure/navigation/Routes.navigation';
 import './infrastructure/styles/index.css';
+import './infrastructure/styles/Datepicker.css';
 
 ReactDOM.render(
   <React.StrictMode>

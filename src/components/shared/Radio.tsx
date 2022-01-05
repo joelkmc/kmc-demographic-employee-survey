@@ -63,23 +63,23 @@ export const Radio: React.FC<RadioProps> = ({
   return (
     <div {...rest}>
       <RadioGroup value={selected} onChange={handleChange}>
-        <RadioGroup.Label className="block text-sm font-proxiSemiBold text-gray-600 mb-1">
+        <RadioGroup.Label className='block text-black mb-1'>
           {label}
         </RadioGroup.Label>
-        <div className="bg-white rounded-md -space-y-px">
+        <div className='bg-white rounded-md -space-y-px'>
           {options.map((option, optionIdx) => (
             <RadioGroup.Option
               key={option.name}
               value={option}
               className={({ checked }) =>
                 classNames(
-                  errors[name] ? 'border-red-500' : '',
+                  errors[name] ? 'border-rose-500' : '',
                   optionIdx === 0 ? 'rounded-tl-md rounded-tr-md' : '',
                   optionIdx === options.length - 1
                     ? 'rounded-bl-md rounded-br-md'
                     : '',
                   checked && !errors[name]
-                    ? 'bg-kmc-primary bg-opacity-5 border-kmc-primary border-opacity-40 z-10'
+                    ? 'bg-primary bg-opacity-5 border-primary border-opacity-40 z-10'
                     : 'border-gray-200',
                   'relative border p-4 flex cursor-pointer outline-none focus:outline-none transition-all'
                 )
@@ -91,35 +91,35 @@ export const Radio: React.FC<RadioProps> = ({
                     <span
                       className={classNames(
                         selected.value === option.value
-                          ? 'bg-kmc-primary border-transparent'
+                          ? 'bg-primary border-transparent'
                           : 'bg-white border-gray-300',
                         active
-                          ? 'ring-2 ring-offset-2 ring-kmc-primary text-opacity-90'
+                          ? 'ring-2 ring-offset-2 ring-primary text-opacity-90'
                           : '',
                         'h-4 w-4 mt-0.5 cursor-pointer rounded-full border flex items-center justify-center transition-all'
                       )}
-                      aria-hidden="true"
+                      aria-hidden='true'
                     >
-                      <span className="rounded-full bg-white w-1.5 h-1.5" />
+                      <span className='rounded-full bg-white w-1.5 h-1.5' />
                     </span>
-                    <div className="ml-3 flex flex-col">
+                    <div className='ml-3 flex flex-col'>
                       <RadioGroup.Label
-                        as="span"
+                        as='span'
                         className={classNames(
                           selected.value === option.value
                             ? 'text-gray-900'
                             : 'text-gray-600',
-                          'block text-sm font-proxiSemiBold transition-all'
+                          'block text-sm font-semibold transition-all'
                         )}
                       >
                         {option.name}
                       </RadioGroup.Label>
                       {option?.description && (
                         <RadioGroup.Description
-                          as="span"
+                          as='span'
                           className={classNames(
                             selected.value === option.value
-                              ? 'text-kmc-primary'
+                              ? 'text-primary'
                               : 'text-gray-500',
                             'block text-sm transition-all'
                           )}
@@ -137,7 +137,7 @@ export const Radio: React.FC<RadioProps> = ({
       </RadioGroup>
 
       {errors[name] && (
-        <p className="mt-2 text-xs text-red-600" id="email-error">
+        <p className='mt-2 text-xs text-rose-600' id='email-error'>
           {errors[name].message}
         </p>
       )}

@@ -16,17 +16,15 @@ export const Toggle: React.FC<ToggleProps> = ({ label, name, className }) => {
 
   return (
     <div className={`flex items-center ${className}`}>
-      <p className="block text-sm font-proxiSemiBold text-gray-600 mr-2">
-        {label}
-      </p>
+      <p className='block font-semibold text-black mr-2'>{label}</p>
       <Switch
         checked={watch(name)}
         onChange={onChange}
         className={`${
-          watch(name) ? 'bg-kmc-primary' : 'bg-gray-200'
+          watch(name) ? 'bg-primary' : 'bg-gray-200'
         } relative inline-flex items-center h-6 rounded-full w-11 transition-all`}
       >
-        <span className="sr-only">{label}</span>
+        <span className='sr-only'>{label}</span>
         <span
           className={`${
             watch(name) ? 'translate-x-6' : 'translate-x-1'
