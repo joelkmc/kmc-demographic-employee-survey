@@ -22,4 +22,33 @@ export class EmployeeAPI {
     );
     return data;
   };
+
+  static employeePostDemographic = async (
+    employeeId?: string,
+    payload?: IEmployeeDemographicPayload
+  ) => {
+    const data = await apiClient<IEmployeeDemographicPayload>(
+      `api/employees/${employeeId}/demographic-study`,
+      { method: 'POST', body: JSON.stringify(payload) }
+    );
+    return data;
+  };
+
+  static uploadFile = async (e: FormData): Promise<string> => {
+    const storage =
+      process.env.NODE_ENV === 'production'
+        ? 'onboarding'
+        : 'erp-staging-files';
+
+    const uploadResponse = await apiClient<string>(
+      `Azure/blob/upload?folder=${storage}`,
+      {
+        baseUrl: '',
+        method: 'POST',
+        body: JSON.stringify(e),
+      }
+    );
+
+    return uploadResponse;
+  };
 }

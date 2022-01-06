@@ -1,6 +1,13 @@
+import dayjs from 'dayjs';
 import React, { useState } from 'react';
+import {
+  usePostEmployeeDemographic,
+  useUploadFile,
+} from '../../../../services/verify_employee/auth.hooks';
+import { useDemographicStore } from '../../../../store/Demographic.store';
+import Button from '../../../shared/Button';
+import { useFormStepContext } from '../context/FormStepContext';
 import { Pulse2022Enum } from '../form-resolver/demographicForm.types';
-import FormStepButtons from './FormStepButtons.component';
 import FormStepWrapper from './FormStepWrapper.component';
 
 export const pulseOptions = () => {
@@ -18,6 +25,11 @@ export const pulseOptions = () => {
 
 const Pulse2022FormComponent = () => {
   const [pulse, setPulse] = useState<null | string>(null);
+  const { handleBack, handleNext } = useFormStepContext();
+
+  const demographicDetails = useDemographicStore(
+    (state) => state.demographicDetails
+  );
 
   const handleChange = (value: Pulse2022Enum) => {
     setPulse((old) => {
@@ -26,6 +38,43 @@ const Pulse2022FormComponent = () => {
   };
 
   console.log(pulse);
+
+  const { mutateAsync } = usePostEmployeeDemographic({
+    onSuccess: () => {
+      handleNext && handleNext();
+    },
+  });
+  const { mutateAsync: uploadFile } = useUploadFile({
+    onSuccess: async (e) => {
+      demographicDetails &&
+        (await mutateAsync({
+          ...demographicDetails,
+          employeeId: demographicDetails?.employeeId,
+          nbiClearanceFilePath: e,
+          pulseFor2022: pulse || '',
+        }));
+
+      handleNext && handleNext();
+    },
+  });
+
+  const onNext = async () => {
+    if (demographicDetails?.nbiClearanceFilePath) {
+      const formData = new FormData();
+      formData.append('files', demographicDetails?.nbiClearanceFilePath);
+      uploadFile(formData);
+    } else {
+      await mutateAsync({
+        ...demographicDetails,
+        employeeId: demographicDetails?.employeeId,
+        nbiClearanceSubmissionDate: dayjs(
+          demographicDetails?.nbiClearanceSubmissionDate
+        ).format('MMM-DD-YYYY'),
+        pulseFor2022: pulse || '',
+      });
+    }
+  };
+
   return (
     <FormStepWrapper>
       <p className='text-xl font-barlow font-bold text-primary text-center'>
@@ -62,7 +111,12 @@ const Pulse2022FormComponent = () => {
         </div>
       </div>
 
-      <FormStepButtons canGoToNextStep={true} />
+      <div className='flex w-full justify-between mt-10'>
+        <Button onClick={handleBack} buttonType='dark'>
+          Back
+        </Button>
+        <Button onClick={onNext}>Next</Button>
+      </div>
     </FormStepWrapper>
   );
 };

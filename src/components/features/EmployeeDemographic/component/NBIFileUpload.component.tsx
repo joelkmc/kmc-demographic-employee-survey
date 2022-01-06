@@ -12,6 +12,8 @@ import FormStepWrapper from './FormStepWrapper.component';
 import { BsPaperclip } from 'react-icons/bs';
 import { IoIosRemoveCircle } from 'react-icons/io';
 import FormStepButtons from './FormStepButtons.component';
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
+import { NBIFormSchema } from '../form-resolver/demographicForm.resolver';
 
 const NBIFileUploadComponent: React.FC = () => {
   const [files, setFiles] = useState<File[]>([]);
@@ -30,11 +32,14 @@ const NBIFileUploadComponent: React.FC = () => {
       nbiClearanceSubmissionDate:
         demographicDetails?.nbiClearanceSubmissionDate,
     },
+    resolver: yupResolver(NBIFormSchema),
   });
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
-      setFiles([...files, ...acceptedFiles]);
+      if (files.length === 0) {
+        setFiles([...files, ...acceptedFiles]);
+      }
     },
     [files]
   );
@@ -45,14 +50,10 @@ const NBIFileUploadComponent: React.FC = () => {
     }
   }, [demographicDetails?.nbiClearanceFilePath]);
 
-  // const formData = new FormData()
-  // formData.append('files', files[0])
-  // uploadFile(formData)
-
   const { getRootProps, getInputProps, inputRef } = useDropzone({
     accept: '.pdf, .doc',
     onDrop,
-    multiple: false,
+    multiple: true,
   });
 
   const handleRemoveFile = useCallback(
@@ -76,13 +77,21 @@ const NBIFileUploadComponent: React.FC = () => {
   const {
     handleSubmit,
     watch,
-    formState: { isValid },
+    formState: { errors },
+    getValues,
   } = useFormReturn;
+
+  console.log(getValues());
 
   const onSubmit = (e: NBIClearanceFormType) => {
     console.log(files[0]);
-    setDemographicDetails({ ...e, nbiClearanceFilePath: files[0] });
-    console.log(e);
+
+    setDemographicDetails({
+      nbiClearanceSubmissionDate: getValues('isNbiAlreadySubmitted')
+        ? e.nbiClearanceSubmissionDate
+        : '',
+      nbiClearanceFilePath: getValues('isNbiAlreadySubmitted') ? '' : files[0],
+    });
   };
 
   return (
@@ -189,7 +198,14 @@ const NBIFileUploadComponent: React.FC = () => {
           </AnimatePresence>
         </div>
 
-        <FormStepButtons nextButtonType='submit' canGoToNextStep={isValid} />
+        <FormStepButtons
+          nextButtonType='submit'
+          canGoToNextStep={
+            errors.isNbiAlreadySubmitted || errors.nbiClearanceSubmissionDate
+              ? false
+              : true
+          }
+        />
       </Form>
     </FormStepWrapper>
   );

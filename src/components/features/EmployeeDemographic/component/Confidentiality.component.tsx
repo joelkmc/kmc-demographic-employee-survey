@@ -83,7 +83,7 @@ const Confidentiality: React.FC = () => {
       <FormStepButtons
         isNextButtonDisabled={!agreed}
         canGoToNextStep={!!agreed}
-        jumpToStep={agreed === 'dont-agree' ? 3 : 0}
+        jumpToStep={agreed === 'dont-agree' ? 4 : 0}
       />
     </FormStepWrapper>
   );

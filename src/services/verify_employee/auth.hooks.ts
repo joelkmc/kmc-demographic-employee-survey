@@ -27,13 +27,23 @@ export const useVerifyEmployee = (
   );
 };
 
-export const useEmployeeDemographic = (
-  employeeID?: string,
-  options?: UseMutationOptions<any, unknown, unknown, unknown>
-): UseMutationResult<any, unknown, unknown, unknown> => {
+export const usePostEmployeeDemographic = (
+  options?: UseMutationOptions<
+    IEmployeeDemographicPayload,
+    unknown,
+    IEmployeeDemographicPayload,
+    unknown
+  >
+): UseMutationResult<
+  IEmployeeDemographicPayload,
+  unknown,
+  IEmployeeDemographicPayload,
+  unknown
+> => {
   return useMutation(
-    ['validate-employee', employeeID],
-    () => EmployeeAPI.employeeDemographic(employeeID, 'POST'),
+    ['validate-employee'],
+    (payload: IEmployeeDemographicPayload) =>
+      EmployeeAPI.employeePostDemographic(payload?.employeeId, payload),
     {
       ...options,
 
@@ -54,5 +64,15 @@ export const useGetEmployeeDemographic = (
 
       retry: 0,
     }
+  );
+};
+
+export const useUploadFile = (
+  options?: UseMutationOptions<string, unknown, FormData, unknown>
+): UseMutationResult<string, unknown, FormData, unknown> => {
+  return useMutation(
+    ['KYC-upload'],
+    (data: FormData) => EmployeeAPI.uploadFile(data),
+    options
   );
 };

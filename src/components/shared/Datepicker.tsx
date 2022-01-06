@@ -65,7 +65,7 @@ export const Datepicker: React.FC<DatepickerProps> = ({
       />
 
       {errors[name] && (
-        <p className='mt-2 text-sm text-red-600' id='email-error'>
+        <p className='mt-2 text-sm text-rose-600' id='email-error'>
           {errors[name].message}
         </p>
       )}

@@ -1,6 +1,10 @@
+interface ExtraConfig extends RequestInit {
+  baseUrl?: string;
+}
+
 export const apiClient = async <T>(
   endpoint: string,
-  customConfig?: RequestInit,
+  customConfig?: ExtraConfig,
   token?: string
 ): Promise<T> => {
   const config: RequestInit = {
@@ -21,7 +25,7 @@ export const apiClient = async <T>(
   }
 
   const res = await fetch(
-    `${process.env.REACT_APP_API_BASE_URL}${endpoint}`,
+    `${customConfig?.baseUrl || process.env.REACT_APP_API_BASE_URL}${endpoint}`,
     config
   );
 
