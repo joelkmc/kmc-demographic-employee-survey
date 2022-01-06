@@ -39,12 +39,12 @@ const Pulse2022FormComponent = () => {
 
   console.log(pulse);
 
-  const { mutateAsync } = usePostEmployeeDemographic({
+  const { mutateAsync, isLoading } = usePostEmployeeDemographic({
     onSuccess: () => {
       handleNext && handleNext();
     },
   });
-  const { mutateAsync: uploadFile } = useUploadFile({
+  const { mutateAsync: uploadFile, isLoading: isUploading } = useUploadFile({
     onSuccess: async (e) => {
       demographicDetails &&
         (await mutateAsync({
@@ -112,10 +112,16 @@ const Pulse2022FormComponent = () => {
       </div>
 
       <div className='flex w-full justify-between mt-10'>
-        <Button onClick={handleBack} buttonType='dark'>
+        <Button
+          onClick={handleBack}
+          buttonType='dark'
+          disabled={isUploading || isLoading}
+        >
           Back
         </Button>
-        <Button onClick={onNext}>Next</Button>
+        <Button onClick={onNext} isLoading={isUploading || isLoading}>
+          Next
+        </Button>
       </div>
     </FormStepWrapper>
   );
