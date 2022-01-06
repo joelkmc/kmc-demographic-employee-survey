@@ -6,7 +6,10 @@ import {
   UseMutationResult,
 } from 'react-query';
 import { EmployeeAPI } from './auth.services';
-import { VerifyEmployeeResponse } from './auth.types';
+import {
+  IEmployeeDemographicPayload,
+  VerifyEmployeeResponse,
+} from './auth.types';
 
 export const useVerifyEmployee = (
   employeeId?: string,
@@ -41,9 +44,9 @@ export const useEmployeeDemographic = (
 
 export const useGetEmployeeDemographic = (
   employeeID?: string,
-  options?: UseQueryOptions<any>
+  options?: UseQueryOptions<IEmployeeDemographicPayload>
 ) => {
-  return useQuery<any>(
+  return useQuery<IEmployeeDemographicPayload>(
     ['employee-information', employeeID],
     () => EmployeeAPI.employeeDemographic(employeeID, 'GET'),
     {

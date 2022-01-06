@@ -1,7 +1,6 @@
 import { MakeGenerics, Route } from 'react-location';
 import { QueryClient } from 'react-query';
 
-import SurveyPage from '../../pages/Survey.page';
 import VerifyEmployeePage from '../../pages/VerifyEmployee.pages';
 import { EmployeeAPI } from '../../services/verify_employee/auth.services';
 
@@ -12,27 +11,25 @@ export const routes: (
 ) => [
   {
     path: '/',
+    element: <VerifyEmployeePage />,
+  },
+  {
+    path: 'employee-information',
     children: [
       {
-        path: 'verify-employee',
-        element: <VerifyEmployeePage />,
-      },
-      {
-        path: 'employee-information',
-        children: [
-          {
-            path: ':employeeID',
-            element: <SurveyPage />,
-            loader: ({
-              params: { employeeID },
-            }: {
-              params: { employeeID: string };
-            }) =>
-              queryClient.fetchQuery(['employee-information', employeeID], () =>
-                EmployeeAPI.employeeDemographic(employeeID)
-              ),
-          },
-        ],
+        path: ':employeeID',
+        element: () =>
+          import('../../pages/Survey.page').then((module) => (
+            <module.default />
+          )),
+        loader: ({
+          params: { employeeID },
+        }: {
+          params: { employeeID: string };
+        }) =>
+          queryClient.fetchQuery(['employee-information', employeeID], () =>
+            EmployeeAPI.employeeDemographic(employeeID)
+          ),
       },
     ],
   },

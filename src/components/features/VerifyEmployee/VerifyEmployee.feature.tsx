@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 // import { useRouter } from 'react-location';
-import { useEmployeeStore } from '../../../store/employee_store/Employee.store';
+import { useEmployeeStore } from '../../../store/Employee.store';
 import {
   ValidateEmployeeFormSchema,
   ValidateEmployeeFormTypes,

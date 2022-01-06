@@ -95,5 +95,5 @@ module.exports = {
 
     width: ['responsive', 'group-hover', 'focus', 'focus-within'],
   },
-  plugins: [require('@tailwindcss/line-clamp')],
+  plugins: [require('@tailwindcss/line-clamp'), require('@tailwindcss/forms')],
 };

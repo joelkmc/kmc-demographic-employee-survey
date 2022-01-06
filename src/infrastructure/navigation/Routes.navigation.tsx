@@ -14,7 +14,6 @@ const RoutesNavigation = () => {
       <Router
         location={location}
         routes={routes(queryClient)}
-        // basepath='/'
         defaultErrorElement={<NotFoundPage />}
         // defaultPendingMs={1000}
         // defaultPendingMinMs={500}

@@ -13,7 +13,7 @@ interface SelectProps extends HTMLProps<HTMLDivElement> {
   name: string;
   options: {
     name: string;
-    value: string | number | null;
+    value: string | number | boolean | null;
   }[];
   onOptionChange?: (e: IOption) => void;
 }
