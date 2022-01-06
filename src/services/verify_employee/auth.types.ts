@@ -35,7 +35,7 @@ export interface IEmployeeDemographicPayload {
 
   // 2nd Part
   nbiClearanceSubmissionDate: string; // required if nbi clearance already submitted
-  nbiClearanceFilePath: string; // required if nbi clearance not yet submitted
+  nbiClearanceFilePath: string | File; // required if nbi clearance not yet submitted
 
   // 3rd Part
   yearsWithKMC: string;

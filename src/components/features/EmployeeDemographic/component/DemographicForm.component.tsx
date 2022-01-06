@@ -23,8 +23,8 @@ import FormStepButtons from './FormStepButtons.component';
 import FormStepWrapper from './FormStepWrapper.component';
 
 const DemographicFormComponent = () => {
-  const demographicDetails = useDemographicStore(
-    (state) => state.demographicDetails
+  const [demographicDetails, setDemographicDetails] = useDemographicStore(
+    (state) => [state.demographicDetails, state.setDemographicDetails]
   );
 
   const useFormReturn = useForm<DemographicFormType>({
@@ -53,7 +53,7 @@ const DemographicFormComponent = () => {
   } = useFormReturn;
 
   const onSubmit = (e: DemographicFormType) => {
-    console.log(e);
+    setDemographicDetails(e);
   };
   return (
     <FormStepWrapper>

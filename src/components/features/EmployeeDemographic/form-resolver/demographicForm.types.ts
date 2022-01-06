@@ -130,3 +130,9 @@ export type DemographicFormType = {
   partOfIndigenousTribes: boolean;
   indigenousTribe: string; // required if partOfIndigenousTribes === true
 };
+
+export type NBIClearanceFormType = {
+  isNbiAlreadySubmitted: boolean;
+  nbiClearanceSubmissionDate: string;
+  // nbiClearanceFilePath: string;
+};

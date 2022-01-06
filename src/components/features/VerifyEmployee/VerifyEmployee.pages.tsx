@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import React from 'react';
-import VerifyEmployeeFeature from '../components/features/VerifyEmployee/VerifyEmployee.feature';
+import VerifyEmployeeFeature from './VerifyEmployee.feature';
 
 const VerifyEmployeePage: React.FC = () => {
   return (

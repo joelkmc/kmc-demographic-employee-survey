@@ -22,7 +22,7 @@ const Confidentiality: React.FC = () => {
 
   return (
     <FormStepWrapper>
-      <div className='flex flex-col gap-3 py-10'>
+      <div className='flex flex-col gap-3'>
         <p className='text-lg font-semibold font-barlow'>Demographic Study</p>
         <p className='text-sm'>
           Kindly spend a few minutes completing this survey. To preserve your

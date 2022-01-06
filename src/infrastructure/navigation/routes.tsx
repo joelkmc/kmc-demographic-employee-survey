@@ -1,7 +1,7 @@
 import { MakeGenerics, Route } from 'react-location';
 import { QueryClient } from 'react-query';
 
-import VerifyEmployeePage from '../../pages/VerifyEmployee.pages';
+import VerifyEmployeePage from '../../components/features/VerifyEmployee/VerifyEmployee.pages';
 import { EmployeeAPI } from '../../services/verify_employee/auth.services';
 
 export const routes: (
@@ -19,9 +19,9 @@ export const routes: (
       {
         path: ':employeeID',
         element: () =>
-          import('../../pages/Survey.page').then((module) => (
-            <module.default />
-          )),
+          import(
+            '../../components/features/EmployeeDemographic/DemographicSurvey.page'
+          ).then((module) => <module.default />),
         loader: ({
           params: { employeeID },
         }: {

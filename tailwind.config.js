@@ -30,7 +30,7 @@ module.exports = {
         'light-blue': themeConstants['light-blue'],
         black: themeConstants.black,
         red: themeConstants.red,
-        green: themeConstants.green,
+        success: themeConstants.green,
       },
       fontFamily: {
         karla: ['Karla'],

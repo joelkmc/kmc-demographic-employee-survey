@@ -4,9 +4,22 @@ import { ReactLocationDevtools } from 'react-location-devtools';
 import LayoutComponent from '../../components/layout';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import NotFoundPage from '../../pages/NotFoundPage';
+import toast from 'react-hot-toast';
 
 const location = new ReactLocation<LocationGenerics>();
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 0,
+      onError: () => {
+        toast('Hello World', {
+          duration: 4000,
+          position: 'top-center',
+        });
+      },
+    },
+  },
+});
 
 const RoutesNavigation = () => {
   return (

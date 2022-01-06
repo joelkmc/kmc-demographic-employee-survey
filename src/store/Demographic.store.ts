@@ -13,7 +13,9 @@ export const useDemographicStore = create<DemographicStoreTypes>(
   devtools((set) => ({
     demographicDetails: null,
     setDemographicDetails: (payload: Partial<IEmployeeDemographicPayload>) => {
-      set({ demographicDetails: payload });
+      set((old) => ({
+        demographicDetails: { ...old.demographicDetails, ...payload },
+      }));
     },
   }))
 );
