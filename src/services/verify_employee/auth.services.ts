@@ -1,5 +1,8 @@
 import { apiClient } from '../apiClient';
-import { VerifyEmployeeResponse } from './auth.types';
+import {
+  IEmployeeDemographicPayload,
+  VerifyEmployeeResponse,
+} from './auth.types';
 
 export class EmployeeAPI {
   static verifyEmployee = async (employeeId?: string, email?: string) => {
@@ -13,7 +16,7 @@ export class EmployeeAPI {
     employeeId?: string,
     method?: 'POST' | 'GET'
   ) => {
-    const data = await apiClient<any>(
+    const data = await apiClient<IEmployeeDemographicPayload>(
       `api/employees/${employeeId}/demographic-study`,
       { method }
     );

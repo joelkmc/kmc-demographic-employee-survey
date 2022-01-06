@@ -1,25 +1,25 @@
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useMatch } from 'react-location';
 import EmployeeDemographicFeature from '../components/features/EmployeeDemographic/EmployeeDemographic.feature';
 import { LocationGenerics } from '../infrastructure/navigation/routes';
-import { useGetEmployeeDemographic } from '../services/verify_employee/auth.hooks';
 import { useDemographicStore } from '../store/Demographic.store';
 
 const SurveyPage: React.FC = () => {
   const {
     params: { employeeID },
+    data,
   } = useMatch<LocationGenerics>();
 
   const [setDemographicDetails, demographicDetails] = useDemographicStore(
     (state) => [state.setDemographicDetails, state.demographicDetails]
   );
 
-  useGetEmployeeDemographic(employeeID, {
-    onSuccess: (data) => {
-      setDemographicDetails(data);
-    },
-  });
+  console.log(data);
+
+  useEffect(() => {
+    setDemographicDetails(data);
+  }, [data, setDemographicDetails]);
 
   return (
     <motion.div

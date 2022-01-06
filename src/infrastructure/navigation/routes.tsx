@@ -39,4 +39,5 @@ export type LocationGenerics = MakeGenerics<{
   Params: {
     employeeID: string;
   };
+  LoaderData: any;
 }>;
