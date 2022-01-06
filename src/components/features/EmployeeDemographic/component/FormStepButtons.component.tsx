@@ -37,7 +37,7 @@ const FormStepButtons: React.FC<Props> = ({
     }
   };
   return (
-    <div className='flex w-full justify-between mt-5'>
+    <div className='flex w-full justify-between mt-10'>
       <Button
         className={`${canGoBack ? 'opacity-100' : 'opacity-0'} transition-all `}
         onClick={handleBackStep}

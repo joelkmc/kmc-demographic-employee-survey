@@ -11,7 +11,7 @@ const FormStepWrapper: React.FC = ({ children }) => {
       animate={{ translateX: 0, opacity: 1 }}
       transition={{ duration: 0.3, type: 'tween' }}
     >
-      {children}
+      <div className='max-w-2xl mx-auto'>{children}</div>
     </motion.div>
   );
 };

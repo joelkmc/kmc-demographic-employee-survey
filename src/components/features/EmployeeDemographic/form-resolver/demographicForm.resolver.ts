@@ -30,3 +30,20 @@ export const InformationUpdateFormSchema = yup.object().shape({
   permanent_Country: addressValidation('updatePermanentAddress'),
   permanent_ZipCode: addressValidation('updatePermanentAddress'),
 });
+
+export const DemographicFormSchema = yup.object().shape({
+  yearsWithKMC: yup.string().required('Please select your answer!'),
+  sexualOrientation: yup.string().required('Please select your answer!'),
+  organizationalRole: yup.string().required('Please select your answer!'),
+  highestDegreeEarned: yup.string().required('Please select your answer!'),
+  addressCategory: yup.string().required('Please select your answer!'),
+  salaryRange: yup.string().required('Please select your answer!'),
+  nationality: yup.string().required('Please select your answer!'),
+  ethnicity: yup.string().required('Please select your answer!'),
+  ethnicGroup: yup.string().required('Please select your answer!'),
+  partOfIndigenousTribes: yup.boolean().required('Please select your answer!'),
+  indigenousTribe: yup.string().when('partOfIndigenoudTribes', {
+    is: (val: boolean) => val,
+    then: yup.string().required('Please select your answer!'),
+  }),
+});

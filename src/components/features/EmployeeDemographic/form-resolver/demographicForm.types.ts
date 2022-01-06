@@ -54,7 +54,7 @@ export enum NationalityEnum {
   FOREIGN = 'Foreign',
 }
 
-export enum RacalEthnicityEnum {
+export enum RacialEthnicityEnum {
   AMERICAN = 'American',
   AFRICAN_AMERICAN = 'African American',
   HISPANIC = 'Hispanic',
@@ -62,7 +62,7 @@ export enum RacalEthnicityEnum {
   CAUCASIAN = 'Caucasian',
 }
 
-export enum EthnicGroup {
+export enum EthnicGroupEnum {
   TAGALOG = 'Tagalog',
   VISAYAN = 'Visayan (Cebuano, Waray, Hiligaynon / Ilongo, Karay-a, Aklanon, Masbatenyo, Romblomanon)',
   ILOCANO = 'Ilocano',
@@ -85,13 +85,13 @@ export enum IndegenousTribeEnum {
 
 export enum Pulse2022Enum {
   READY_TO_OVER = 'Ready for 2021 to be over',
-  FEELING_GREAT_BONUS = 'Ready for 2021 to be over',
-  FEELING_GREAT_WORRIED = 'Ready for 2021 to be over',
-  GREAT_YEAR = 'Ready for 2021 to be over',
-  START_JOB_NEW_COMPANY = 'Ready for 2021 to be over',
-  CANT_WAIT_BACK_TO_OFFICE = 'Ready for 2021 to be over',
-  DREADING_BACK_TO_OFFICE = 'Ready for 2021 to be over',
-  WORRIED_OMICRON = 'Ready for 2021 to be over',
+  FEELING_GREAT_BONUS = "Feeling great and can't wait to spend my 2021 bonus",
+  FEELING_GREAT_WORRIED = "Feeling great, but I'm worried about 2022",
+  GREAT_YEAR = '2022 should be a great year',
+  START_JOB_NEW_COMPANY = "Can't wait until I start my new job at a new company",
+  CANT_WAIT_BACK_TO_OFFICE = "Can't wait to get back to the office ",
+  DREADING_BACK_TO_OFFICE = 'Dreading to go back to the office ',
+  WORRIED_OMICRON = 'Worried that the Omicron variant will cause another series of lockdowns',
 }
 
 export type InformationUpdateFormType = {
@@ -118,16 +118,15 @@ export type DemographicFormType = {
   // nbiClearanceSubmissionDate: string; // required if nbi clearance already submitted
   // nbiClearanceFilePath: string; // required if nbi clearance not yet submitted
   // // 3rd Part
-  // yearsWithKMC: string;
-  // sexualOrientation: string;
-  // organizationalRole: string;
-  // highestDegreeEarned: string;
-  // addressCategory: string;
-  // salaryRange: string;
-  // nationality: string;
-  // ethnicity: string;
-  // ethnicGroup: string;
-  // partOfIndigenousTribes: boolean;
-  // indigenousTribe: string; // required if partOfIndigenousTribes === true
-  // pulseFor2022: string; // concat all answers with semicolon
+  yearsWithKMC: string;
+  sexualOrientation: string;
+  organizationalRole: string;
+  highestDegreeEarned: string;
+  addressCategory: string;
+  salaryRange: string;
+  nationality: string;
+  ethnicity: string;
+  ethnicGroup: string;
+  partOfIndigenousTribes: boolean;
+  indigenousTribe: string; // required if partOfIndigenousTribes === true
 };
