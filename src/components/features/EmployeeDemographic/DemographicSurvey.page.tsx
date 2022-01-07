@@ -44,6 +44,7 @@ const SurveyPage: React.FC = () => {
 
       setDemographicDetails(data);
     },
+    staleTime: Infinity,
   });
 
   return (

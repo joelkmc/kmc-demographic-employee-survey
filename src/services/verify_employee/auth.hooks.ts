@@ -41,7 +41,7 @@ export const usePostEmployeeDemographic = (
   unknown
 > => {
   return useMutation(
-    ['validate-employee'],
+    ['post-demographic-survey'],
     (payload: IEmployeeDemographicPayload) =>
       EmployeeAPI.employeePostDemographic(payload?.employeeId, payload),
     {
@@ -57,7 +57,7 @@ export const useGetEmployeeDemographic = (
   options?: UseQueryOptions<IEmployeeDemographicPayload>
 ) => {
   return useQuery<IEmployeeDemographicPayload>(
-    ['employee-information', employeeID],
+    ['get-demographic-survey', employeeID],
     () => EmployeeAPI.employeeDemographic(employeeID),
     {
       ...options,
