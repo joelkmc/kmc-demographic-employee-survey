@@ -1,5 +1,6 @@
 import { MakeGenerics, Route } from 'react-location';
 import { QueryClient } from 'react-query';
+import AlreadySubmittedPage from '../../components/features/AlreadySubmitted/AlreadySubmitted.page';
 
 import VerifyEmployeePage from '../../components/features/VerifyEmployee/VerifyEmployee.pages';
 import { EmployeeAPI } from '../../services/verify_employee/auth.services';
@@ -22,7 +23,7 @@ export const routes: (
           import(
             '../../components/features/EmployeeDemographic/DemographicSurvey.page'
           ).then((module) => <module.default />),
-        loader: ({
+        loader: async ({
           params: { employeeID },
         }: {
           params: { employeeID: string };
@@ -32,6 +33,10 @@ export const routes: (
           ),
       },
     ],
+  },
+  {
+    path: 'already-submitted',
+    element: <AlreadySubmittedPage />,
   },
 ];
 

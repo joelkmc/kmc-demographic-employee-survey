@@ -25,7 +25,17 @@ export const pulseOptions = () => {
 };
 
 const Pulse2022FormComponent = () => {
-  const [pulse, setPulse] = useState<null | string>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [pulse, setPulse] = useState({
+    [Pulse2022Enum.READY_TO_OVER]: false,
+    [Pulse2022Enum.FEELING_GREAT_BONUS]: false,
+    [Pulse2022Enum.FEELING_GREAT_WORRIED]: false,
+    [Pulse2022Enum.GREAT_YEAR]: false,
+    [Pulse2022Enum.START_JOB_NEW_COMPANY]: false,
+    [Pulse2022Enum.CANT_WAIT_BACK_TO_OFFICE]: false,
+    [Pulse2022Enum.DREADING_BACK_TO_OFFICE]: false,
+    [Pulse2022Enum.WORRIED_OMICRON]: false,
+  });
   const { handleBack, handleNext } = useFormStepContext();
 
   const demographicDetails = useDemographicStore(
@@ -33,9 +43,26 @@ const Pulse2022FormComponent = () => {
   );
 
   const handleChange = (value: Pulse2022Enum) => {
+    // const index = pulse.findIndex((item) => item === value);
     setPulse((old) => {
-      return old ? [...old.split(';'), value].join(';') : value;
+      console.log({ value, prevValue: pulse[value], newValue: !pulse[value] });
+      return {
+        ...old,
+        [value]: !old[value],
+      };
     });
+  };
+
+  const concatPulse = () => {
+    const arr = [];
+
+    for (const key in pulse) {
+      if (pulse[key as Pulse2022Enum]) {
+        arr.push(key);
+      }
+    }
+
+    return arr.join(';');
   };
 
   const { mutateAsync, isLoading } = usePostEmployeeDemographic({
@@ -51,7 +78,7 @@ const Pulse2022FormComponent = () => {
           ...demographicDetails,
           employeeId: demographicDetails?.employeeId,
           nbiClearanceFilePath: e,
-          pulseFor2022: pulse || '',
+          pulseFor2022: concatPulse(),
         }));
     },
   });
@@ -68,7 +95,7 @@ const Pulse2022FormComponent = () => {
         nbiClearanceSubmissionDate: dayjs(
           demographicDetails?.nbiClearanceSubmissionDate
         ).format('MM-DD-YYYY'),
-        pulseFor2022: pulse || '',
+        pulseFor2022: concatPulse(),
       });
     }
   };
@@ -88,23 +115,28 @@ const Pulse2022FormComponent = () => {
         <div className='mt-4'>
           <legend className='sr-only'>Pulse 2022</legend>
           <div className='space-y-2'>
-            {pulseOptions().map((option) => (
-              <div key={option.id} className='flex items-center'>
-                <input
-                  id={option.id}
-                  name={option.id}
-                  type='radio'
-                  className='focus:ring-primary focus:ring-opacity-90 h-4 w-4 text-primary border-gray-300'
-                  onChange={() => handleChange(option.id)}
-                />
-                <label
-                  htmlFor={option.id}
-                  className='ml-3 block text-sm font-medium text-gray-700'
-                >
-                  {option.title}
-                </label>
-              </div>
-            ))}
+            {Object.keys(pulse).map((option) => {
+              return (
+                <div key={option} className='flex items-center'>
+                  <input
+                    id={option}
+                    checked={pulse[option as Pulse2022Enum]}
+                    name={option}
+                    type='radio'
+                    readOnly
+                    className='focus:ring-primary focus:ring-opacity-90 h-4 w-4 text-primary border-gray-300'
+                    // onChange={() => handleChange(option as Pulse2022Enum)}
+                    onClick={() => handleChange(option as Pulse2022Enum)}
+                  />
+                  <label
+                    htmlFor={option}
+                    className='ml-3 block text-sm font-medium text-gray-700'
+                  >
+                    {option}
+                  </label>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

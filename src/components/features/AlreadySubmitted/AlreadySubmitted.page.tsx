@@ -1,17 +1,20 @@
 import React from 'react';
-import { FaCheckCircle } from 'react-icons/fa';
-import FormStepWrapper from './FormStepWrapper.component';
+import { FaExclamationCircle } from 'react-icons/fa';
 import { SocialIcon } from 'react-social-icons';
 
-const SuccessComponent = () => {
+import FormStepWrapper from '../EmployeeDemographic/component/FormStepWrapper.component';
+
+const AlreadySubmittedPage: React.FC = () => {
   return (
     <FormStepWrapper>
       <div className='p-5 rounded-lg max-w-sm mx-auto shadow-lg border-gray-100 border bg-gray-50'>
         <div className='flex flex-col items-center gap-4'>
-          <FaCheckCircle className='text-6xl text-green-600' />
-          <p className='font-proxiExtraBold text-2xl text-green-600'>SUCCESS</p>
+          <FaExclamationCircle className='text-6xl text-primary text-opacity-70' />
+          <p className='font-proxiExtraBold text-2xl text-primary text-opacity-70'>
+            Ooops!
+          </p>
           <div className='mt-2 text-gray-600 text-center'>
-            <p>Thank you for answering our survey!</p>
+            <p>Looks like you already answered this survey!</p>
           </div>
         </div>
       </div>
@@ -56,4 +59,4 @@ const SuccessComponent = () => {
   );
 };
 
-export default SuccessComponent;
+export default AlreadySubmittedPage;

@@ -1,8 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { useMatch, useNavigate } from 'react-location';
 import { LocationGenerics } from '../../../infrastructure/navigation/routes';
+import { useGetEmployeeDemographic } from '../../../services/verify_employee/auth.hooks';
 import { useDemographicStore } from '../../../store/Demographic.store';
 import { useEmployeeStore } from '../../../store/Employee.store';
 import Confidentiality from './component/Confidentiality.component';
@@ -19,7 +20,6 @@ import {
 const SurveyPage: React.FC = () => {
   const {
     params: { employeeID },
-    data,
   } = useMatch<LocationGenerics>();
 
   const [setDemographicDetails, demographicDetails] = useDemographicStore(
@@ -34,9 +34,17 @@ const SurveyPage: React.FC = () => {
     state.firstName,
   ]);
 
-  useEffect(() => {
-    setDemographicDetails(data);
-  }, [data, setDemographicDetails]);
+  useGetEmployeeDemographic(employeeID, {
+    onSuccess: (data) => {
+      if (data.nbiClearanceFilePath || data.nbiClearanceSubmissionDate) {
+        console.log('should redirect');
+        navigate({ to: '/already-submitted' });
+        return;
+      }
+
+      setDemographicDetails(data);
+    },
+  });
 
   return (
     <motion.div

@@ -38,8 +38,6 @@ export const apiClient = async <T>(
     }
   }
 
-  console.log(customConfig?.baseUrl);
-
   const res = await fetch(
     `${customConfig?.baseUrl || process.env.REACT_APP_API_BASE_URL}${endpoint}`,
     config
