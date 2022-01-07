@@ -30,8 +30,14 @@ export const FormStepContextProvider: React.FC<{ formStepLength: number }> = ({
 
   const handleNext = (jumpTo?: number) => {
     setAction('next');
+
+    setpreviousStep(
+      (jumpTo || activeStep + 1) - (jumpTo ? jumpTo - activeStep : 1)
+    );
+
     setActiveStep((old) => {
-      setpreviousStep((jumpTo || old + 1) - (jumpTo ? jumpTo - activeStep : 1));
+      console.log({ jumpTo, old });
+
       return jumpTo || old + 1;
     });
   };

@@ -50,11 +50,14 @@ export const DemographicFormSchema = yup.object().shape({
 
 export const NBIFormSchema = yup.object().shape({
   isNbiAlreadySubmitted: yup.boolean().required('Please select your answer!'),
-  nbiClearanceSubmissionDate: yup.date().when('isNbiAlreadySubmitted', {
-    is: (value: boolean) => value,
-    then: yup
-      .date()
-      .required('Enter a valid date!')
-      .typeError('Enter a valid date!'),
-  }),
+  nbiClearanceSubmissionDate: yup
+    .date()
+    .nullable()
+    .when('isNbiAlreadySubmitted', {
+      is: (value: boolean) => value,
+      then: yup
+        .date()
+        .required('Enter a valid date!')
+        .typeError('Enter a valid date!'),
+    }),
 });

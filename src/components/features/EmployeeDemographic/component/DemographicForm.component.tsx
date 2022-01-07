@@ -1,7 +1,8 @@
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
+import { AnimatePresence } from 'framer-motion';
 import { useForm } from 'react-hook-form';
+
 import { useDemographicStore } from '../../../../store/Demographic.store';
 import { Form } from '../../../shared/Form';
 import Select from '../../../shared/Select';
@@ -21,6 +22,7 @@ import { DemographicFormSchema } from '../form-resolver/demographicForm.resolver
 import { DemographicFormType } from '../form-resolver/demographicForm.types';
 import FormStepButtons from './FormStepButtons.component';
 import FormStepWrapper from './FormStepWrapper.component';
+import InputSlideAnimation from '../../../shared/animation/InputSlide.animation';
 
 const DemographicFormComponent = () => {
   const [demographicDetails, setDemographicDetails] = useDemographicStore(
@@ -55,6 +57,7 @@ const DemographicFormComponent = () => {
   const onSubmit = (e: DemographicFormType) => {
     setDemographicDetails(e);
   };
+
   return (
     <FormStepWrapper>
       <Form onSubmit={handleSubmit(onSubmit)} useFormReturn={useFormReturn}>
@@ -168,20 +171,7 @@ const DemographicFormComponent = () => {
 
             <AnimatePresence>
               {watch('partOfIndigenousTribes') && (
-                <motion.div
-                  initial={{
-                    opacity: 0,
-                    height: 0,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    height: 'auto',
-                  }}
-                  exit={{
-                    opacity: 0,
-                    height: 0,
-                  }}
-                >
+                <InputSlideAnimation className='mt-4'>
                   <Select
                     name='indigenousTribe'
                     label='What Indigenous tribe in the Philippines?'
@@ -190,7 +180,7 @@ const DemographicFormComponent = () => {
                       ...indegenousTribeOptions(),
                     ]}
                   />
-                </motion.div>
+                </InputSlideAnimation>
               )}
             </AnimatePresence>
           </div>

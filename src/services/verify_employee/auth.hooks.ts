@@ -58,7 +58,7 @@ export const useGetEmployeeDemographic = (
 ) => {
   return useQuery<IEmployeeDemographicPayload>(
     ['employee-information', employeeID],
-    () => EmployeeAPI.employeeDemographic(employeeID, 'GET'),
+    () => EmployeeAPI.employeeDemographic(employeeID),
     {
       ...options,
 

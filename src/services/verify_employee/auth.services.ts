@@ -12,13 +12,9 @@ export class EmployeeAPI {
     return data;
   };
 
-  static employeeDemographic = async (
-    employeeId?: string,
-    method?: 'POST' | 'GET'
-  ) => {
+  static employeeDemographic = async (employeeId?: string) => {
     const data = await apiClient<IEmployeeDemographicPayload>(
-      `api/employees/${employeeId}/demographic-study`,
-      { method }
+      `api/employees/${employeeId}/demographic-study`
     );
     return data;
   };
@@ -29,7 +25,7 @@ export class EmployeeAPI {
   ) => {
     const data = await apiClient<IEmployeeDemographicPayload>(
       `api/employees/${employeeId}/demographic-study`,
-      { method: 'POST', body: JSON.stringify(payload) }
+      { method: 'POST', body: payload }
     );
     return data;
   };
@@ -43,9 +39,9 @@ export class EmployeeAPI {
     const uploadResponse = await apiClient<string>(
       `Azure/blob/upload?folder=${storage}`,
       {
-        baseUrl: '',
+        baseUrl: 'https://erp-kmc.azurewebsites.net/api/',
         method: 'POST',
-        body: JSON.stringify(e),
+        body: e,
       }
     );
 

@@ -62,7 +62,7 @@ const SurveyPage: React.FC = () => {
             <p className='text-gray-500'>{email}</p>
             <p className='text-gray-500 sr-only'>{employeeID}</p>
           </div>
-          <FormStepContextProvider formStepLength={4}>
+          <FormStepContextProvider formStepLength={5}>
             <AnimatedFormsContainer />
           </FormStepContextProvider>
         </>

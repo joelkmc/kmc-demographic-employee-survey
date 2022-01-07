@@ -1,7 +1,7 @@
 import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useForm } from 'react-hook-form';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 import { Form } from '../../../shared/Form';
 import Input from '../../../shared/Input';
@@ -12,6 +12,7 @@ import Select from '../../../shared/Select';
 import { useDemographicStore } from '../../../../store/Demographic.store';
 import FormStepWrapper from './FormStepWrapper.component';
 import FormStepButtons from './FormStepButtons.component';
+import InputSlideAnimation from '../../../shared/animation/InputSlide.animation';
 
 const InformationUpdateForm: React.FC = () => {
   const [setDemographicDetails, demographicDetails] = useDemographicStore(
@@ -87,21 +88,7 @@ const InformationUpdateForm: React.FC = () => {
 
             <AnimatePresence>
               {getValues('updatePermanentAddress') && (
-                <motion.div
-                  initial={{
-                    opacity: 0,
-                    height: 0,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    height: 'auto',
-                  }}
-                  exit={{
-                    opacity: 0,
-                    height: 0,
-                  }}
-                  className='mt-4'
-                >
+                <InputSlideAnimation className='mt-4'>
                   <div className='flex flex-col gap-4 p-5 border rounded-md'>
                     <Input
                       label='Permanent Address line 1'
@@ -133,7 +120,7 @@ const InformationUpdateForm: React.FC = () => {
                       />
                     </div>
                   </div>
-                </motion.div>
+                </InputSlideAnimation>
               )}
             </AnimatePresence>
 
@@ -149,21 +136,7 @@ const InformationUpdateForm: React.FC = () => {
 
               <AnimatePresence>
                 {getValues('updateCurrentAddress') && (
-                  <motion.div
-                    initial={{
-                      opacity: 0,
-                      height: 0,
-                    }}
-                    animate={{
-                      opacity: 1,
-                      height: 'auto',
-                    }}
-                    exit={{
-                      opacity: 0,
-                      height: 0,
-                    }}
-                    className='mt-4'
-                  >
+                  <InputSlideAnimation className='mt-4'>
                     <div className='flex flex-col gap-4 p-5 border rounded-md'>
                       <Input label='Current Address line 1' name='cA_Line1' />
                       <div className='flex flex-col sm:flex-row gap-4 sm:gap-2'>
@@ -191,7 +164,7 @@ const InformationUpdateForm: React.FC = () => {
                         />
                       </div>
                     </div>
-                  </motion.div>
+                  </InputSlideAnimation>
                 )}
               </AnimatePresence>
             </div>

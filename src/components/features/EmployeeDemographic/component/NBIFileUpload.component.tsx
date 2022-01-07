@@ -1,7 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { useDropzone } from 'react-dropzone';
 import { useForm } from 'react-hook-form';
+import { BsPaperclip } from 'react-icons/bs';
+import { IoIosRemoveCircle } from 'react-icons/io';
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 
 import { useDemographicStore } from '../../../../store/Demographic.store';
 import { Datepicker } from '../../../shared/Datepicker';
@@ -9,17 +12,18 @@ import { Form } from '../../../shared/Form';
 import Select from '../../../shared/Select';
 import { NBIClearanceFormType } from '../form-resolver/demographicForm.types';
 import FormStepWrapper from './FormStepWrapper.component';
-import { BsPaperclip } from 'react-icons/bs';
-import { IoIosRemoveCircle } from 'react-icons/io';
-import FormStepButtons from './FormStepButtons.component';
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { NBIFormSchema } from '../form-resolver/demographicForm.resolver';
+import InputSlideAnimation from '../../../shared/animation/InputSlide.animation';
+import Button from '../../../shared/Button';
+import { useFormStepContext } from '../context/FormStepContext';
 
 const NBIFileUploadComponent: React.FC = () => {
   const [files, setFiles] = useState<File[]>([]);
   const [demographicDetails, setDemographicDetails] = useDemographicStore(
     (state) => [state.demographicDetails, state.setDemographicDetails]
   );
+
+  const { handleBack, handleNext } = useFormStepContext();
 
   const useFormReturn = useForm<NBIClearanceFormType>({
     mode: 'onChange',
@@ -74,24 +78,25 @@ const NBIFileUploadComponent: React.FC = () => {
     [inputRef]
   );
 
-  const {
-    handleSubmit,
-    watch,
-    formState: { errors },
-    getValues,
-  } = useFormReturn;
-
-  console.log(getValues());
+  const { handleSubmit, watch } = useFormReturn;
 
   const onSubmit = (e: NBIClearanceFormType) => {
-    console.log(files[0]);
+    if (files.length > 0 && !e.isNbiAlreadySubmitted) {
+      setDemographicDetails({
+        nbiClearanceSubmissionDate: '',
+        nbiClearanceFilePath: files[0],
+      });
+
+      handleNext && handleNext();
+      return;
+    }
 
     setDemographicDetails({
-      nbiClearanceSubmissionDate: getValues('isNbiAlreadySubmitted')
-        ? e.nbiClearanceSubmissionDate
-        : '',
-      nbiClearanceFilePath: getValues('isNbiAlreadySubmitted') ? '' : files[0],
+      nbiClearanceSubmissionDate: e.nbiClearanceSubmissionDate,
+      nbiClearanceFilePath: '',
     });
+
+    handleNext && handleNext();
   };
 
   return (
@@ -110,43 +115,15 @@ const NBIFileUploadComponent: React.FC = () => {
 
           <AnimatePresence exitBeforeEnter>
             {watch('isNbiAlreadySubmitted') && (
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  height: 0,
-                }}
-                animate={{
-                  opacity: 1,
-                  height: 'auto',
-                }}
-                exit={{
-                  opacity: 0,
-                  height: 0,
-                }}
-                className='mt-4'
-              >
+              <InputSlideAnimation className='mt-4'>
                 <Datepicker
                   name='nbiClearanceSubmissionDate'
                   label='Date Submitted'
                 />
-              </motion.div>
+              </InputSlideAnimation>
             )}
             {watch('isNbiAlreadySubmitted') === false && (
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  height: 0,
-                }}
-                animate={{
-                  opacity: 1,
-                  height: 'auto',
-                }}
-                exit={{
-                  opacity: 0,
-                  height: 0,
-                }}
-                className='mt-4'
-              >
+              <InputSlideAnimation className='mt-4'>
                 <p className='font-medium mb-2'>Upload your NBI Clearance</p>
                 <div
                   {...getRootProps({
@@ -193,19 +170,20 @@ const NBIFileUploadComponent: React.FC = () => {
                     </dd>
                   </div>
                 )}
-              </motion.div>
+              </InputSlideAnimation>
             )}
           </AnimatePresence>
         </div>
 
-        <FormStepButtons
-          nextButtonType='submit'
-          canGoToNextStep={
-            errors.isNbiAlreadySubmitted || errors.nbiClearanceSubmissionDate
-              ? false
-              : true
-          }
-        />
+        <div className='flex w-full justify-between mt-10'>
+          <Button onClick={handleBack} buttonType='dark'>
+            Back
+          </Button>
+
+          <Button className='ml-auto' type='submit'>
+            Next
+          </Button>
+        </div>
       </Form>
     </FormStepWrapper>
   );

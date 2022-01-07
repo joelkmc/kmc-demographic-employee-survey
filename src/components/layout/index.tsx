@@ -14,7 +14,7 @@ const LayoutComponent: React.FC = ({ children }) => {
               alt='KMC-LOGO'
             />
             <div className='h-10 py-2 border-r border-white'></div>
-            <p className='text-xl sm:text-2xl font-karla font-semibold text-white'>
+            <p className='text-lg sm:text-xl md:text-2xl font-karla font-medium sm:font-semibold text-white'>
               Employee Information Survey
             </p>
           </div>

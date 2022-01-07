@@ -23,10 +23,8 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      disabled={disabled}
-      className={`justify-center disabled:bg-opacity-50 outline-none px-10 py-2 rounded-md focus:ring-2  ring-opacity-20 shadow-sm hover:shadow-md focus:shadow-md transition-all flex items-center ${
-        buttonStyles[buttonType]
-      } ${className} ${isLoading ? 'opacity-50' : ''}`}
+      disabled={disabled || isLoading}
+      className={`justify-center disabled:bg-opacity-50 outline-none px-10 py-2 rounded-md focus:ring-2  ring-opacity-20 shadow-sm hover:shadow-md focus:shadow-md transition-all flex items-center ${buttonStyles[buttonType]} ${className}`}
       {...rest}
     >
       {isLoading && <AiOutlineLoading className='animate-spin text-white' />}

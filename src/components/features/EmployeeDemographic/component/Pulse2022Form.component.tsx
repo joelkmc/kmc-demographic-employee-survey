@@ -1,5 +1,6 @@
-import dayjs from 'dayjs';
 import React, { useState } from 'react';
+import dayjs from 'dayjs';
+
 import {
   usePostEmployeeDemographic,
   useUploadFile,
@@ -37,13 +38,12 @@ const Pulse2022FormComponent = () => {
     });
   };
 
-  console.log(pulse);
-
   const { mutateAsync, isLoading } = usePostEmployeeDemographic({
     onSuccess: () => {
       handleNext && handleNext();
     },
   });
+
   const { mutateAsync: uploadFile, isLoading: isUploading } = useUploadFile({
     onSuccess: async (e) => {
       demographicDetails &&
@@ -53,23 +53,21 @@ const Pulse2022FormComponent = () => {
           nbiClearanceFilePath: e,
           pulseFor2022: pulse || '',
         }));
-
-      handleNext && handleNext();
     },
   });
 
   const onNext = async () => {
     if (demographicDetails?.nbiClearanceFilePath) {
       const formData = new FormData();
-      formData.append('files', demographicDetails?.nbiClearanceFilePath);
-      uploadFile(formData);
+      formData.append('files', demographicDetails.nbiClearanceFilePath);
+      await uploadFile(formData);
     } else {
       await mutateAsync({
         ...demographicDetails,
         employeeId: demographicDetails?.employeeId,
         nbiClearanceSubmissionDate: dayjs(
           demographicDetails?.nbiClearanceSubmissionDate
-        ).format('MMM-DD-YYYY'),
+        ).format('MM-DD-YYYY'),
         pulseFor2022: pulse || '',
       });
     }

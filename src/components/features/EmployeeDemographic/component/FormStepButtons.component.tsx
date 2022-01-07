@@ -30,7 +30,6 @@ const FormStepButtons: React.FC<Props> = ({
     }
   };
   const handleNextStep = () => {
-    console.log(canGoNext && canGoToNextStep, { canGoNext, canGoToNextStep });
     if (canGoNext && canGoToNextStep) {
       onNext && onNext();
       handleNext && handleNext(jumpToStep);
