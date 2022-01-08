@@ -3,7 +3,7 @@ import { FaCheckCircle } from 'react-icons/fa';
 import FormStepWrapper from './FormStepWrapper.component';
 import { SocialIcon } from 'react-social-icons';
 
-const SuccessComponent = () => {
+const SuccessComponent: React.FC = () => {
   return (
     <FormStepWrapper>
       <div className='p-5 rounded-lg max-w-sm mx-auto shadow-lg border-gray-100 border bg-gray-50'>

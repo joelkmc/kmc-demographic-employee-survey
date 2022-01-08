@@ -1,10 +1,11 @@
-import { Outlet, ReactLocation, Router } from 'react-location';
-import { LocationGenerics, routes } from './routes';
-import { ReactLocationDevtools } from 'react-location-devtools';
-import LayoutComponent from '../../components/layout';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import NotFoundPage from '../../pages/NotFoundPage';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import toast from 'react-hot-toast';
+import { Outlet, ReactLocation, Router } from 'react-location';
+
+import { LocationGenerics, routes } from './routes';
+import LayoutComponent from '../../components/layout';
+import NotFoundPage from '../../pages/NotFoundPage';
 
 const location = new ReactLocation<LocationGenerics>();
 const queryClient = new QueryClient({
@@ -12,7 +13,7 @@ const queryClient = new QueryClient({
     queries: {
       retry: 0,
       onError: () => {
-        toast('Hello World', {
+        toast('An error has occured!', {
           duration: 4000,
           position: 'top-center',
         });
@@ -34,7 +35,8 @@ const RoutesNavigation = () => {
         <LayoutComponent>
           <Outlet />
         </LayoutComponent>
-        <ReactLocationDevtools initialIsOpen={false} />
+        {/* <ReactLocationDevtools initialIsOpen={false} /> */}
+        <ReactQueryDevtools initialIsOpen={false} />
       </Router>
     </QueryClientProvider>
   );

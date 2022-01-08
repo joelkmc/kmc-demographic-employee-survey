@@ -55,7 +55,7 @@ const NBIFileUploadComponent: React.FC = () => {
   }, [demographicDetails?.nbiClearanceFilePath]);
 
   const { getRootProps, getInputProps, inputRef } = useDropzone({
-    accept: '.pdf, .doc',
+    accept: '.pdf, jpeg, jpg, png',
     onDrop,
     multiple: true,
   });

@@ -11,24 +11,10 @@ import { useFormStepContext } from '../context/FormStepContext';
 import { Pulse2022Enum } from '../form-resolver/demographicForm.types';
 import FormStepWrapper from './FormStepWrapper.component';
 
-export const pulseOptions = () => {
-  const array: any[] = [];
-
-  Object.values(Pulse2022Enum).forEach((option) => {
-    array.push({
-      id: option,
-      title: option,
-    });
-  });
-
-  return array;
-};
-
-const Pulse2022FormComponent = () => {
+const Pulse2022FormComponent: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [pulse, setPulse] = useState({
     [Pulse2022Enum.READY_TO_OVER]: false,
-    [Pulse2022Enum.FEELING_GREAT_BONUS]: false,
     [Pulse2022Enum.FEELING_GREAT_WORRIED]: false,
     [Pulse2022Enum.GREAT_YEAR]: false,
     [Pulse2022Enum.START_JOB_NEW_COMPANY]: false,
@@ -36,6 +22,7 @@ const Pulse2022FormComponent = () => {
     [Pulse2022Enum.DREADING_BACK_TO_OFFICE]: false,
     [Pulse2022Enum.WORRIED_OMICRON]: false,
   });
+
   const { handleBack, handleNext } = useFormStepContext();
 
   const demographicDetails = useDemographicStore(
@@ -45,7 +32,6 @@ const Pulse2022FormComponent = () => {
   const handleChange = (value: Pulse2022Enum) => {
     // const index = pulse.findIndex((item) => item === value);
     setPulse((old) => {
-      console.log({ value, prevValue: pulse[value], newValue: !pulse[value] });
       return {
         ...old,
         [value]: !old[value],

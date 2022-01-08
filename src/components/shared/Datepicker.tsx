@@ -56,7 +56,7 @@ export const Datepicker: React.FC<DatepickerProps> = ({
         {label}
       </label>
       <DatePicker
-        className='w-full'
+        className='w-full bg-white'
         onChange={handleChange}
         value={state}
         calendarIcon={<BsCalendar4Week className='text-gray-600' />}

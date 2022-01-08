@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NotFoundPage = () => {
+const NotFoundPage: React.FC = () => {
   return <div className='p-10'>NotFound</div>;
 };
 

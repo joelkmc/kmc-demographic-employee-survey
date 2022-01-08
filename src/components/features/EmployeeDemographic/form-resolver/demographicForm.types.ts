@@ -6,6 +6,12 @@ export enum YrsWithKmcEnum {
   MORE_10_YRS = 'Ten years or more',
 }
 
+export enum GenderEnum {
+  MALE = 'Male',
+  FEMALE = 'Female',
+  OTHERS = 'Others (Sexual Orientation)',
+}
+
 export enum SexualOrientationEnum {
   LESBIAN = 'Lesbian',
   GAY = 'Gay',
@@ -84,8 +90,7 @@ export enum IndegenousTribeEnum {
 }
 
 export enum Pulse2022Enum {
-  READY_TO_OVER = 'Ready for 2021 to be over',
-  FEELING_GREAT_BONUS = "Feeling great and can't wait to spend my 2021 bonus",
+  READY_TO_OVER = 'Glad 2021 is over',
   FEELING_GREAT_WORRIED = "Feeling great, but I'm worried about 2022",
   GREAT_YEAR = '2022 should be a great year',
   START_JOB_NEW_COMPANY = "Can't wait until I start my new job at a new company",
@@ -114,10 +119,7 @@ export type InformationUpdateFormType = {
 };
 
 export type DemographicFormType = {
-  // 2nd Part
-  // nbiClearanceSubmissionDate: string; // required if nbi clearance already submitted
-  // nbiClearanceFilePath: string; // required if nbi clearance not yet submitted
-  // // 3rd Part
+  gender: string;
   yearsWithKMC: string;
   sexualOrientation: string;
   organizationalRole: string;
@@ -128,7 +130,6 @@ export type DemographicFormType = {
   ethnicity: string;
   ethnicGroup: string;
   partOfIndigenousTribes: boolean;
-  indigenousTribe: string; // required if partOfIndigenousTribes === true
 };
 
 export type NBIClearanceFormType = {

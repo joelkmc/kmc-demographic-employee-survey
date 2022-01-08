@@ -39,6 +39,7 @@ export interface IEmployeeDemographicPayload {
 
   // 3rd Part
   yearsWithKMC?: string;
+  gender?: string;
   sexualOrientation?: string;
   organizationalRole?: string;
   highestDegreeEarned?: string;

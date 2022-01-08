@@ -36,11 +36,11 @@ const SurveyPage: React.FC = () => {
 
   useGetEmployeeDemographic(employeeID, {
     onSuccess: (data) => {
-      if (data.nbiClearanceFilePath || data.nbiClearanceSubmissionDate) {
-        console.log('should redirect');
-        navigate({ to: '/already-submitted' });
-        return;
-      }
+      // if (data.nbiClearanceFilePath || data.nbiClearanceSubmissionDate) {
+      //   console.log('should redirect');
+      //   navigate({ to: '/already-submitted' });
+      //   return;
+      // }
 
       setDemographicDetails(data);
     },

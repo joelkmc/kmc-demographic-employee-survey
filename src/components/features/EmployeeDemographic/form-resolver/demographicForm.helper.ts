@@ -2,8 +2,8 @@ import { IOption } from '../../../shared/Select';
 import {
   AddressCategoryEnum,
   EthnicGroupEnum,
+  GenderEnum,
   HighestDegreeEnum,
-  IndegenousTribeEnum,
   NationalityEnum,
   OrganizationRoleEnum,
   RacialEthnicityEnum,
@@ -19,6 +19,19 @@ export const yrsWithKmcOptions = (): IOption[] => {
     array.push({
       name: yrsOption,
       value: yrsOption,
+    });
+  });
+
+  return array;
+};
+
+export const genderOptions = (): IOption[] => {
+  const array: IOption[] = [];
+
+  Object.values(GenderEnum).forEach((gender) => {
+    array.push({
+      name: gender,
+      value: gender,
     });
   });
 
@@ -123,19 +136,6 @@ export const ethnicOptions = (): IOption[] => {
     array.push({
       name: ethnic,
       value: ethnic,
-    });
-  });
-
-  return array;
-};
-
-export const indegenousTribeOptions = (): IOption[] => {
-  const array: IOption[] = [];
-
-  Object.values(IndegenousTribeEnum).forEach((tribe) => {
-    array.push({
-      name: tribe,
-      value: tribe,
     });
   });
 

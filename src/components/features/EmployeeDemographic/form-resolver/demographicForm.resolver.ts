@@ -1,5 +1,6 @@
 import { emailRegex } from './../../../../utils/regex';
 import * as yup from 'yup';
+import { GenderEnum } from './demographicForm.types';
 
 const addressValidation = (
   typeOfAddress: 'updateCurrentAddress' | 'updatePermanentAddress'
@@ -32,24 +33,42 @@ export const InformationUpdateFormSchema = yup.object().shape({
 });
 
 export const DemographicFormSchema = yup.object().shape({
-  yearsWithKMC: yup.string().required('Please select your answer!'),
-  sexualOrientation: yup.string().required('Please select your answer!'),
-  organizationalRole: yup.string().required('Please select your answer!'),
-  highestDegreeEarned: yup.string().required('Please select your answer!'),
-  addressCategory: yup.string().required('Please select your answer!'),
-  salaryRange: yup.string().required('Please select your answer!'),
-  nationality: yup.string().required('Please select your answer!'),
-  ethnicity: yup.string().required('Please select your answer!'),
-  ethnicGroup: yup.string().required('Please select your answer!'),
-  partOfIndigenousTribes: yup.boolean().required('Please select your answer!'),
-  indigenousTribe: yup.string().when('partOfIndigenoudTribes', {
-    is: (val: boolean) => val,
-    then: yup.string().required('Please select your answer!'),
-  }),
+  yearsWithKMC: yup.string().nullable().required('Please select your answer!'),
+  gender: yup.string().nullable().required('Please select your answer!'),
+  sexualOrientation: yup
+    .string()
+    .nullable()
+    .when('gender', {
+      is: (value: GenderEnum) => value === GenderEnum.OTHERS,
+      then: yup.string().nullable().required('Please select your answer!'),
+    }),
+  organizationalRole: yup
+    .string()
+    .nullable()
+    .required('Please select your answer!'),
+  highestDegreeEarned: yup
+    .string()
+    .nullable()
+    .required('Please select your answer!'),
+  addressCategory: yup
+    .string()
+    .nullable()
+    .required('Please select your answer!'),
+  salaryRange: yup.string().nullable().required('Please select your answer!'),
+  nationality: yup.string().nullable().required('Please select your answer!'),
+  ethnicity: yup.string().nullable().required('Please select your answer!'),
+  ethnicGroup: yup.string().nullable().required('Please select your answer!'),
+  partOfIndigenousTribes: yup
+    .boolean()
+    .nullable()
+    .required('Please select your answer!'),
 });
 
 export const NBIFormSchema = yup.object().shape({
-  isNbiAlreadySubmitted: yup.boolean().required('Please select your answer!'),
+  isNbiAlreadySubmitted: yup
+    .boolean()
+    .nullable()
+    .required('Please select your answer!'),
   nbiClearanceSubmissionDate: yup
     .date()
     .nullable()

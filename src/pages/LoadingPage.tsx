@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LoadingPage = () => {
+const LoadingPage: React.FC = () => {
   return <div>Loading.....</div>;
 };
 

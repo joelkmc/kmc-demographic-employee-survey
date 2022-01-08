@@ -19,6 +19,9 @@ const InputSlideAnimation: React.FC<Props> = ({ children, ...rest }) => {
       exit={{
         opacity: 0,
         height: 0,
+        transition: {
+          delay: 0.3,
+        },
       }}
       {...rest}
     >
