@@ -39,7 +39,7 @@ export class EmployeeAPI {
     const uploadResponse = await apiClient<string>(
       `Azure/blob/upload?folder=${storage}`,
       {
-        baseUrl: 'https://erp-kmc.azurewebsites.net/api/',
+        baseUrl: process.env.REACT_APP_ERP_BASE_URL,
         method: 'POST',
         body: e,
       }
