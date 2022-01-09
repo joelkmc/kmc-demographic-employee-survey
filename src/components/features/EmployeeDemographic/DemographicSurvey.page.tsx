@@ -38,7 +38,7 @@ const SurveyPage: React.FC = () => {
     onSuccess: (data) => {
       if (data.nbiClearanceFilePath || data.nbiClearanceSubmissionDate) {
         console.log('should redirect');
-        navigate({ to: '/already-submitted' });
+        navigate({ to: '/already-submitted', replace: true });
         return;
       }
 
