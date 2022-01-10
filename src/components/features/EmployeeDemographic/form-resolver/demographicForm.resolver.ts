@@ -2,13 +2,14 @@ import { emailRegex } from './../../../../utils/regex';
 import * as yup from 'yup';
 import { GenderEnum } from './demographicForm.types';
 
-const addressValidation = (
-  typeOfAddress: 'updateCurrentAddress' | 'updatePermanentAddress'
-) =>
-  yup.string().when(typeOfAddress, {
-    is: (value: boolean) => value,
-    then: yup.string().required('This field is required!'),
-  });
+const currentAddressValidation = yup.string().when('updateCurrentAddress', {
+  is: (value: boolean) => value,
+  then: yup.string().required('This field is required!'),
+});
+const permanentAddressValidation = yup.string().when('updatePermanentAddress', {
+  is: (value: boolean) => value,
+  then: yup.string().required('This field is required!'),
+});
 
 export const InformationUpdateFormSchema = yup.object().shape({
   workEmail: yup
@@ -19,17 +20,17 @@ export const InformationUpdateFormSchema = yup.object().shape({
   updateCurrentAddress: yup.boolean(),
   updatePermanentAddress: yup.boolean(),
 
-  cA_Line1: addressValidation('updateCurrentAddress'),
-  cA_City: addressValidation('updateCurrentAddress'),
-  cA_State: addressValidation('updateCurrentAddress'),
-  cA_Country: addressValidation('updateCurrentAddress'),
-  cA_ZipCode: addressValidation('updateCurrentAddress'),
+  cA_Line1: currentAddressValidation,
+  cA_City: currentAddressValidation,
+  cA_State: currentAddressValidation,
+  cA_Country: currentAddressValidation,
+  cA_ZipCode: currentAddressValidation,
 
-  permanent_Line1: addressValidation('updatePermanentAddress'),
-  permanent_City: addressValidation('updatePermanentAddress'),
-  permanent_State: addressValidation('updatePermanentAddress'),
-  permanent_Country: addressValidation('updatePermanentAddress'),
-  permanent_ZipCode: addressValidation('updatePermanentAddress'),
+  permanent_Line1: permanentAddressValidation,
+  permanent_City: permanentAddressValidation,
+  permanent_State: permanentAddressValidation,
+  permanent_Country: permanentAddressValidation,
+  permanent_ZipCode: permanentAddressValidation,
 });
 
 export const DemographicFormSchema = yup.object().shape({

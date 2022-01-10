@@ -80,7 +80,7 @@ const Pulse2022FormComponent: React.FC = () => {
         employeeId: demographicDetails?.employeeId,
         nbiClearanceSubmissionDate: dayjs(
           demographicDetails?.nbiClearanceSubmissionDate
-        ).format('MM-DD-YYYY'),
+        ).format('YYYY-MM-DD'),
         pulseFor2022: concatPulse(),
       });
     }

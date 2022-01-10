@@ -27,25 +27,27 @@ const InformationUpdateForm: React.FC = () => {
       updateCurrentAddress: demographicDetails?.updateCurrentAddress,
       workEmail: demographicDetails?.workEmail,
       mobileNumber: demographicDetails?.mobileNumber,
-      cA_City: demographicDetails?.cA_City,
-      cA_Country: demographicDetails?.cA_Country,
-      cA_Line1: demographicDetails?.cA_Line1,
-      cA_State: demographicDetails?.cA_State,
-      cA_ZipCode: demographicDetails?.cA_ZipCode,
-      permanent_City: demographicDetails?.permanent_City,
-      permanent_Country: demographicDetails?.permanent_Country,
-      permanent_Line1: demographicDetails?.permanent_Line1,
-      permanent_State: demographicDetails?.permanent_State,
-      permanent_ZipCode: demographicDetails?.permanent_ZipCode,
+      cA_City: demographicDetails?.cA_City || '',
+      cA_Country: demographicDetails?.cA_Country || '',
+      cA_Line1: demographicDetails?.cA_Line1 || '',
+      cA_State: demographicDetails?.cA_State || '',
+      cA_ZipCode: demographicDetails?.cA_ZipCode || '',
+      permanent_City: demographicDetails?.permanent_City || '',
+      permanent_Country: demographicDetails?.permanent_Country || '',
+      permanent_Line1: demographicDetails?.permanent_Line1 || '',
+      permanent_State: demographicDetails?.permanent_State || '',
+      permanent_ZipCode: demographicDetails?.permanent_ZipCode || '',
     },
   });
 
   const {
-    formState: { isValid },
+    formState: { isValid, errors },
 
     handleSubmit,
-    getValues,
+    watch,
   } = useFormReturn;
+
+  console.log(errors);
 
   const onSubmit = (e: InformationUpdateFormType) => {
     setDemographicDetails(e);
@@ -87,7 +89,7 @@ const InformationUpdateForm: React.FC = () => {
             />
 
             <AnimatePresence>
-              {getValues('updatePermanentAddress') && (
+              {watch('updatePermanentAddress') && (
                 <InputSlideAnimation className='mt-4'>
                   <div className='flex flex-col gap-4 p-5 border rounded-md'>
                     <Input
@@ -135,7 +137,7 @@ const InformationUpdateForm: React.FC = () => {
               />
 
               <AnimatePresence>
-                {getValues('updateCurrentAddress') && (
+                {watch('updateCurrentAddress') && (
                   <InputSlideAnimation className='mt-4'>
                     <div className='flex flex-col gap-4 p-5 border rounded-md'>
                       <Input label='Current Address line 1' name='cA_Line1' />
