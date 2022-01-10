@@ -36,8 +36,6 @@ export const FormStepContextProvider: React.FC<{ formStepLength: number }> = ({
     );
 
     setActiveStep((old) => {
-      console.log({ jumpTo, old });
-
       return jumpTo || old + 1;
     });
   };
