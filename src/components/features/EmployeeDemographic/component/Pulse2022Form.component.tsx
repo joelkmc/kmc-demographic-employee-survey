@@ -89,6 +89,7 @@ const Pulse2022FormComponent: React.FC = () => {
         nbiClearanceSubmissionDate: dayjs(
           demographicDetails?.nbiClearanceSubmissionDate
         ).format('YYYY-MM-DD'),
+        nbiClearanceFilePath: '',
         pulseFor2022: concatPulse(),
       });
     }
