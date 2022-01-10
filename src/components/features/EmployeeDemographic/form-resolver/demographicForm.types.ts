@@ -27,7 +27,7 @@ export enum SexualOrientationEnum {
 }
 
 export enum OrganizationRoleEnum {
-  MANAGER = 'Manager/supervisor higher than first level(including senior management positions)',
+  MANAGER = 'Manager/supervisor higher than first level (including senior management positions)',
   FIRST_LEVEL_SUPERVISOR = 'First-level supervisor',
   NOT_MANAGER_NOT_SUPERVISOR = 'Not a manager or supervisor',
 }
@@ -40,7 +40,7 @@ export enum HighestDegreeEnum {
 }
 
 export enum AddressCategoryEnum {
-  OWNED = 'Owned or being bought by you(or someone in the household)',
+  OWNED = 'Owned or being bought by you (or someone in the household)',
   RENTED = 'Rented for money',
   OCCUPIED = 'Occupied withoud payment of money or rent',
 }
