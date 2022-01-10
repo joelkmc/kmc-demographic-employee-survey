@@ -46,12 +46,12 @@ export enum AddressCategoryEnum {
 }
 
 export enum SalaryRangeEnum {
-  SR_12000_15999 = '₱12,000 througn ₱15,999',
-  SR_16000_24999 = '₱16,000 througn ₱24,999',
-  SR_25000_34999 = '₱25,000 througn ₱34,999',
-  SR_35000_49999 = '₱35,000 througn ₱49,999',
-  SR_50000_74999 = '₱50,000 througn ₱74,999',
-  SR_75000_99999 = '₱75,000 througn ₱99,999',
+  SR_12000_15999 = '₱12,000 through ₱15,999',
+  SR_16000_24999 = '₱16,000 through ₱24,999',
+  SR_25000_34999 = '₱25,000 through ₱34,999',
+  SR_35000_49999 = '₱35,000 through ₱49,999',
+  SR_50000_74999 = '₱50,000 through ₱74,999',
+  SR_75000_99999 = '₱75,000 through ₱99,999',
   SR_100000_GREATER = '₱100,000 and greater',
 }
 
