@@ -13,6 +13,7 @@ import FormStepWrapper from './FormStepWrapper.component';
 
 const Pulse2022FormComponent: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isWithPulseError, setIsWithPulseError] = useState(false);
   const [pulse, setPulse] = useState({
     [Pulse2022Enum.READY_TO_OVER]: false,
     [Pulse2022Enum.FEELING_GREAT_WORRIED]: false,
@@ -31,6 +32,8 @@ const Pulse2022FormComponent: React.FC = () => {
 
   const handleChange = (value: Pulse2022Enum) => {
     // const index = pulse.findIndex((item) => item === value);
+    setIsWithPulseError(false);
+
     setPulse((old) => {
       return {
         ...old,
@@ -70,6 +73,11 @@ const Pulse2022FormComponent: React.FC = () => {
   });
 
   const onNext = async () => {
+    if (!concatPulse()) {
+      setIsWithPulseError(true);
+      return;
+    }
+
     if (demographicDetails?.nbiClearanceFilePath) {
       const formData = new FormData();
       formData.append('files', demographicDetails.nbiClearanceFilePath);
@@ -98,6 +106,11 @@ const Pulse2022FormComponent: React.FC = () => {
 
       <div className='mt-10'>
         <label className='font-medium font-barlow'>Select all that apply</label>
+        {isWithPulseError && (
+          <p className='font-medium font-barlow text-xs text-rose-500'>
+            Please select at least 1 answer!
+          </p>
+        )}
         <div className='mt-4'>
           <legend className='sr-only'>Pulse 2022</legend>
           <div className='space-y-2'>
@@ -110,13 +123,17 @@ const Pulse2022FormComponent: React.FC = () => {
                     name={option}
                     type='radio'
                     readOnly
-                    className='focus:ring-primary focus:ring-opacity-90 h-4 w-4 text-primary border-gray-300'
+                    className={`${
+                      isWithPulseError ? 'border-rose-500' : 'border-gray-300'
+                    } focus:ring-opacity-90 h-4 w-4 text-primary focus:ring-primary `}
                     // onChange={() => handleChange(option as Pulse2022Enum)}
                     onClick={() => handleChange(option as Pulse2022Enum)}
                   />
                   <label
                     htmlFor={option}
-                    className='ml-3 block text-sm font-medium text-gray-700'
+                    className={`${
+                      isWithPulseError ? 'text-rose-600' : 'text-gray-700'
+                    } ml-3 block text-sm font-medium`}
                   >
                     {option}
                   </label>
