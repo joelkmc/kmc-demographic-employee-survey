@@ -23,8 +23,12 @@ const InformationUpdateForm: React.FC = () => {
     mode: 'onChange',
     resolver: yupResolver(InformationUpdateFormSchema),
     defaultValues: {
-      updatePermanentAddress: demographicDetails?.updatePermanentAddress,
-      updateCurrentAddress: demographicDetails?.updateCurrentAddress,
+      updatePermanentAddress: demographicDetails?.updatePermanentAddress
+        ? true
+        : false,
+      updateCurrentAddress: demographicDetails?.updateCurrentAddress
+        ? true
+        : false,
       workEmail: demographicDetails?.workEmail,
       mobileNumber: demographicDetails?.mobileNumber,
       cA_City: demographicDetails?.cA_City || '',

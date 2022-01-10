@@ -45,8 +45,9 @@ export const FormStepContextProvider: React.FC<{ formStepLength: number }> = ({
   const handleBack = () => {
     setAction('back');
     setActiveStep(() => {
+      const old = previousStep;
       setpreviousStep(previousStep - 1);
-      return previousStep;
+      return old - 1;
     });
   };
 
