@@ -55,7 +55,7 @@ const NBIFileUploadComponent: React.FC = () => {
   }, [demographicDetails?.nbiClearanceFilePath]);
 
   const { getRootProps, getInputProps, inputRef } = useDropzone({
-    accept: '.pdf, jpeg, jpg, png',
+    accept: '.pdf, .jpeg, .jpg, .png',
     onDrop,
     multiple: true,
   });
@@ -132,10 +132,13 @@ const NBIFileUploadComponent: React.FC = () => {
                   })}
                 >
                   <input {...getInputProps()} />
-                  <p>
-                    Drag &apos;n&apos; drop some files here, or click to select
-                    files
-                  </p>
+                  <div className='px-2'>
+                    <p>
+                      Drag &apos;n&apos; drop some files here, or click to
+                      select files
+                    </p>
+                    <p className='text-xs'>(.pdf, .png, .jpg, .jpeg files)</p>
+                  </div>
                 </div>
                 {files.length > 0 && (
                   <div className='py-4 sm:py-5'>
