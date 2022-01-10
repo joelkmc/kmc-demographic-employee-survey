@@ -31,13 +31,14 @@ export class EmployeeAPI {
   };
 
   static uploadFile = async (e: FormData): Promise<string> => {
-    const storage =
-      process.env.NODE_ENV === 'production'
-        ? 'onboarding'
-        : 'erp-staging-files';
+    // const storage =
+    //   process.env.NODE_ENV === 'production'
+    //     ? 'onboarding'
+    //     : 'erp-staging-files';
 
     const uploadResponse = await apiClient<string>(
-      `Azure/blob/upload?folder=${storage}`,
+      `Azure/blob/upload?folder=erp-staging-files`, // staging
+      // `Azure/blob/upload?folder=onboarding`, // prod
       {
         baseUrl: process.env.REACT_APP_ERP_BASE_URL,
         method: 'POST',
