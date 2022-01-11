@@ -22,9 +22,9 @@ const SurveyPage: React.FC = () => {
     params: { employeeID },
   } = useMatch<LocationGenerics>();
 
-  const [setDemographicDetails, demographicDetails] = useDemographicStore(
-    (state) => [state.setDemographicDetails, state.demographicDetails]
-  );
+  const [setDemographicDetails] = useDemographicStore((state) => [
+    state.setDemographicDetails,
+  ]);
 
   const navigate = useNavigate();
 
@@ -34,14 +34,8 @@ const SurveyPage: React.FC = () => {
     state.firstName,
   ]);
 
-  useGetEmployeeDemographic(employeeID, {
+  const { isLoading } = useGetEmployeeDemographic(employeeID, {
     onSuccess: (data) => {
-      // if (data.nbiClearanceFilePath || data.nbiClearanceSubmissionDate) {
-      //   console.log('should redirect');
-      //   navigate({ to: '/already-submitted', replace: true });
-      //   return;
-      // }
-
       setDemographicDetails(data);
     },
     staleTime: Infinity,
@@ -53,7 +47,7 @@ const SurveyPage: React.FC = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      {demographicDetails?.workEmail && (
+      {!isLoading && (
         <>
           <div className='mb-4 text-sm'>
             <button
