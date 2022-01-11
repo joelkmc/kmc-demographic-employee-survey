@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useForm } from 'react-hook-form';
 import { AnimatePresence } from 'framer-motion';
@@ -45,13 +45,17 @@ const InformationUpdateForm: React.FC = () => {
   });
 
   const {
-    formState: { isValid, errors },
-
+    formState: { isValid },
+    trigger,
     handleSubmit,
     watch,
   } = useFormReturn;
 
-  console.log(errors);
+  useEffect(() => {
+    if (demographicDetails?.workEmail) {
+      trigger();
+    }
+  }, [demographicDetails?.workEmail, trigger]);
 
   const onSubmit = (e: InformationUpdateFormType) => {
     setDemographicDetails(e);
