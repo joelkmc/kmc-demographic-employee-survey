@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-// import { useRouter } from 'react-location';
 import { useEmployeeStore } from '../../../store/Employee.store';
 import {
   ValidateEmployeeFormSchema,
   ValidateEmployeeFormTypes,
 } from './form-resolver/VerifyEmployee';
 import { Form } from '../../shared/Form';
-import Select, { IOption } from '../../shared/Select';
 import Input from '../../shared/Input';
 import Button from '../../shared/Button';
 import { useVerifyEmployee } from '../../../services/verify_employee/auth.hooks';
 import { useNavigate } from 'react-location';
 
 const VerifyEmployeeFeature: React.FC = () => {
-  const [isNewHire, setIsNewHire] = useState(false);
   const [validate, setValidate] = useState({
     idNumber: '',
     email: '',
@@ -60,12 +57,8 @@ const VerifyEmployeeFeature: React.FC = () => {
   const onSubmit = (e: ValidateEmployeeFormTypes) => {
     setValidate(() => ({
       email: e.email,
-      idNumber: isNewHire ? `${e.idNumber}` : `${e.employeeType}${e.idNumber}`,
+      idNumber: e.idNumber,
     }));
-  };
-
-  const handleChange = (e: IOption) => {
-    e.value === 'TEMPID-' ? setIsNewHire(true) : setIsNewHire(false);
   };
 
   return (
@@ -78,25 +71,11 @@ const VerifyEmployeeFeature: React.FC = () => {
       </div>
       <Form useFormReturn={useFormReturn} onSubmit={onSubmit}>
         <div className='flex flex-wrap'>
-          <Select
-            onOptionChange={handleChange}
-            label='Employee Type'
-            name='employeeType'
-            options={[
-              { value: null, name: 'Select Employee Type' },
-              { value: '', name: 'KMCS Internal' },
-              { value: 'C', name: 'KMCC Internal' },
-              { value: 'ID', name: 'Client Distributed Team' },
-            ]}
-            className='mb-4 w-full md:w-1/2 px-1'
-          />
-
           <Input
-            label='Employee ID (Numeric value only)'
+            label='Employee ID'
             name='idNumber'
             placeholder='Enter Employee ID'
             className='mb-4 w-full md:w-1/2 px-1'
-            type='number'
           />
         </div>
 

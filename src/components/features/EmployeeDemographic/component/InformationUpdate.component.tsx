@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useForm } from 'react-hook-form';
 import { AnimatePresence } from 'framer-motion';
@@ -11,13 +11,16 @@ import { InformationUpdateFormType } from '../form-resolver/demographicForm.type
 import Select from '../../../shared/Select';
 import { useDemographicStore } from '../../../../store/Demographic.store';
 import FormStepWrapper from './FormStepWrapper.component';
-import FormStepButtons from './FormStepButtons.component';
 import InputSlideAnimation from '../../../shared/animation/InputSlide.animation';
+import { useFormStepContext } from '../context/FormStepContext';
+import Button from '../../../shared/Button';
 
 const InformationUpdateForm: React.FC = () => {
   const [setDemographicDetails, demographicDetails] = useDemographicStore(
     (state) => [state.setDemographicDetails, state.demographicDetails]
   );
+
+  const { handleNext } = useFormStepContext();
 
   const useFormReturn = useForm<InformationUpdateFormType>({
     mode: 'onChange',
@@ -45,20 +48,16 @@ const InformationUpdateForm: React.FC = () => {
   });
 
   const {
-    formState: { isValid },
-    trigger,
+    formState: { errors },
     handleSubmit,
     watch,
   } = useFormReturn;
 
-  useEffect(() => {
-    if (demographicDetails?.workEmail) {
-      trigger();
-    }
-  }, [demographicDetails?.workEmail, trigger]);
-
+  console.log(errors);
   const onSubmit = (e: InformationUpdateFormType) => {
     setDemographicDetails(e);
+
+    handleNext && handleNext();
   };
 
   return (
@@ -181,7 +180,11 @@ const InformationUpdateForm: React.FC = () => {
           </div>
         </div>
 
-        <FormStepButtons nextButtonType='submit' canGoToNextStep={isValid} />
+        <div className='flex jutify-end w-full mt-10'>
+          <Button type='submit' className='ml-auto'>
+            Next
+          </Button>
+        </div>
       </Form>
     </FormStepWrapper>
   );
