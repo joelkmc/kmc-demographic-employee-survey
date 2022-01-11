@@ -70,14 +70,12 @@ const VerifyEmployeeFeature: React.FC = () => {
         </p>
       </div>
       <Form useFormReturn={useFormReturn} onSubmit={onSubmit}>
-        <div className='flex flex-wrap'>
-          <Input
-            label='Employee ID'
-            name='idNumber'
-            placeholder='Enter Employee ID'
-            className='mb-4 w-full md:w-1/2 px-1'
-          />
-        </div>
+        <Input
+          label='Employee ID'
+          name='idNumber'
+          placeholder='Enter Employee ID'
+          className='mb-4 px-1'
+        />
 
         <Input
           label='Email Address (Work or Personal Email)'
